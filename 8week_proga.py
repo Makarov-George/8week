@@ -1,6 +1,7 @@
 
 import math
 import matplotlib.pyplot as plt
+import numpy as np
 
 class Radioactive():
     def __init__(self, Z, A):
@@ -57,11 +58,13 @@ class Radioactive():
         for i in nucleis:
             arZ.append(i.get_Z())
             arR.append(i.radius)
-        list.sort(arZ)
-        list.sort(arR)
-        print(arZ,arR)
+        indices = sorted(range(len(arZ)), key=lambda i: arZ[i])
+        arZ = np.array(arZ)
+        arR = np.array(arR)
+        indices = arZ.argsort()  
+        print(arZ[indices], arR[indices] )
         plt.figure(figsize=[9,6])
-        plt.plot(arZ, arR, linewidth=2)
+        plt.plot(arZ[indices], arR[indices], linewidth=2)
         plt.grid(True, color='#DDDDDD', linestyle='--', which='both')
         plt.ylabel('Радиус ядра, Мэв')
         plt.xlabel('Заряд ядра')
@@ -75,11 +78,13 @@ class Radioactive():
         for i in nucleis:
             arA.append(i.get_A())
             arE.append(i.relative_energy)
-        list.sort(arA)
-        list.sort(arE)
-        print(arE,arA)
+        indices = sorted(range(len(arA)), key=lambda i: arA[i])
+        arA = np.array(arA)
+        arE = np.array(arE)
+        indices = arA.argsort()  
+        print(arA[indices], arE[indices] )
         plt.figure(figsize=[9,6])
-        plt.plot(arA, arE, linewidth=2)
+        plt.plot(arA[indices], arE[indices], linewidth=2)
         plt.grid(True, color='#DDDDDD', linestyle='--', which='both')
         plt.ylabel('Удельная энергия связи, Мэв/нкулон')
         plt.xlabel('Количество нуклонов')
